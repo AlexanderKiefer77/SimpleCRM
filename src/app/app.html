@@ -7,9 +7,12 @@
     <!-- mit " [opened]="true" " ist die sidenav standartmässig geöffnet -->
 
     <ul class="menu-items">
-      <li><mat-icon>fact_check</mat-icon>Dashboard</li>
-      <li><mat-icon>perm_identity</mat-icon>User</li>
+      <li routerLink=""><mat-icon>fact_check</mat-icon>Dashboard</li>
+      <li routerLink="user"><mat-icon>perm_identity</mat-icon>User</li>
     </ul>
+    <!-- mit " routerLink="user" " oder " [routerLink]="['user']" " wird zu der jeweiligen component gewechselt + der Name wird in der Adressleiste angehangen.
+          Funktioniert in Zusammenhang mit dem "path" in "app.routes.ts" -->
+
   </mat-drawer>
 
   <div class="example-sidenav-content">
@@ -21,10 +24,13 @@
       <span>Simple CRM</span>
     </mat-toolbar>
 
+    <div class="router-container">
+      <router-outlet></router-outlet>
+    </div>
 
   </div>
 
 </mat-drawer-container>
 
 
-<router-outlet />
+<!-- <router-outlet /> -->

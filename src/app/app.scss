@@ -16,7 +16,7 @@
 }
 
 .logo-container {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding: 0 16px;
     min-height: 56px;
     display: flex;
@@ -44,5 +44,13 @@ mat-toolbar {
         &:hover {
             background-color: rgba(0, 0, 0, 0.1);
         }
+
+        &:focus {
+            outline: none;
+        }
     }
+}
+
+.router-container {
+    padding: 16px 0 0 56px;
 }
