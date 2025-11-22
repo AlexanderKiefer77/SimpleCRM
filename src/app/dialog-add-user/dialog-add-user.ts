@@ -33,7 +33,7 @@ export class DialogAddUser {
   birthDate: Date = new Date();
   loading = false; // für loading bar in dialog add user
 
-  constructor(public dialogRef: MatDialogRef<DialogAddUser> ) {} // private firestore: AngularFirestore
+  constructor(public dialogRef: MatDialogRef<DialogAddUser> ) {} // ,private firestore: AngularFirestore
 
   saveUser() {
     this.user.birthDate = this.birthDate.getTime();
