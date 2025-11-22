@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -33,7 +33,7 @@ export class DialogAddUser {
   birthDate: Date = new Date();
   loading = false; // für loading bar in dialog add user
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<DialogAddUser> ) {} // private firestore: AngularFirestore
 
   saveUser() {
     this.user.birthDate = this.birthDate.getTime();
@@ -45,6 +45,7 @@ export class DialogAddUser {
         .then((result: any) => {
           this.loading = false;
           console.log('Adding user finished', result);
+          this.dialogRef.close();
       }); */
   }
 }
