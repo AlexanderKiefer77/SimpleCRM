@@ -5,13 +5,16 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogAddUser } from '../dialog-add-user/dialog-add-user';
 import { User as UserModel } from '../../models/user.class';
-import {MatCardModule} from '@angular/material/card';
-// import { NgForOf } from "../../../node_modules/@angular/common/types/_common_module-chunk";
+import { MatCardModule } from '@angular/material/card';
+import { collection, onSnapshot  } from 'firebase/firestore';
+import { db } from './../firebase.config'; // Pfad anpassen
+
+
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, MatTooltipModule, MatDialogModule, MatCardModule ], // ,NgForOf
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule, MatDialogModule, MatCardModule],
   templateUrl: './user.html',
   styleUrls: ['./user.scss'],
 })
@@ -19,23 +22,27 @@ import {MatCardModule} from '@angular/material/card';
 export class User {
 
   user = new UserModel();
-  allUsers = [];
+  allUsers: UserModel[] = [];
 
 
-  constructor(public dialog: MatDialog) { // ,private firestore: AngularFirestore
-  }
 
-  /*
+  constructor(public dialog: MatDialog) {}
+
+
+
   ngOnInit(): void {
-    this.firestore
-    .collection('users');
-    .valueChanges()
-    .subscribe((changes: any) => {
-      console.log('Received changes from DB', changes);
-      this.allUsers = changes;
-    });
-  }
-  */
+  const usersCollection = collection(db, 'users');
+
+  onSnapshot(usersCollection, snapshot => {
+    this.allUsers = snapshot.docs.map(doc => doc.data() as UserModel);
+    console.log('Realtime Users', this.allUsers);
+  }, error => {
+    console.error('Error fetching users', error);
+  });
+
+}
+
+
 
   openDialog() {
     this.dialog.open(DialogAddUser);
