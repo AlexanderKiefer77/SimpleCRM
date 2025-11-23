@@ -1,4 +1,13 @@
 <mat-card class="user-detail-header">
+    <button matIconButton aria-label="icon button with a vertical three dot icon" class="pin-right-upper-corner"
+        [matMenuTriggerFor]="userMenu">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #userMenu="matMenu">
+        <button mat-menu-item (click)="editUserDetail()">Edit</button>
+    </mat-menu>
+
     <img src="./../../assets/img/profile/1.webp" alt="">
     <div class="user-details">
         <h2>Max Mustermann</h2> <br> <!-- <h2>{{ user.firstName }} {{ user.lastName }}</h2> <br> -->
@@ -8,9 +17,14 @@
 
 <mat-card class="mt-32">
 
-    <button matIconButton aria-label="icon button with a vertical three dot icon" class="pin-right-upper-corner" (click)="openAddressDialog()">
+    <button matIconButton aria-label="icon button with a vertical three dot icon" class="pin-right-upper-corner"
+        [matMenuTriggerFor]="adressMenu">
         <mat-icon>more_vert</mat-icon>
     </button>
+
+    <mat-menu #adressMenu="matMenu">
+        <button mat-menu-item (click)="editMenu()">Edit</button>
+    </mat-menu>
 
     <mat-card-title>Address</mat-card-title>
     <mat-card-content>
