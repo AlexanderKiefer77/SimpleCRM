@@ -8,15 +8,17 @@
         <button mat-menu-item (click)="editUserDetail()">Edit</button>
     </mat-menu>
 
-    <img src="./../../assets/img/profile/1.webp" alt="">
-    <div class="user-details">
-        <h2>Max Mustermann</h2> <br> <!-- <h2>{{ user.firstName }} {{ user.lastName }}</h2> <br> -->
-        email@email.de <!-- {{ user.email }}-->
+    <div class="info">
+        <img src="img/profile/monkey.png" alt="">
+
+        <div class="user-details">
+            <h2>{{ user.firstName }} {{ user.lastName }}</h2> <br>
+            <p>{{ user.email }}</p>
+        </div>
     </div>
 </mat-card>
 
 <mat-card class="mt-32">
-
     <button matIconButton aria-label="icon button with a vertical three dot icon" class="pin-right-upper-corner"
         [matMenuTriggerFor]="adressMenu">
         <mat-icon>more_vert</mat-icon>
@@ -26,9 +28,9 @@
         <button mat-menu-item (click)="editMenu()">Edit</button>
     </mat-menu>
 
-    <mat-card-title>Address</mat-card-title>
+    <mat-card-title class="address-info">Address</mat-card-title>
     <mat-card-content>
-        Musterstr. 23 <br> <!-- {{ user.address }} <br> -->
-        12345 Musterstadt <!-- {{ user.zipCode }} {{ user.city }} -->
+        {{ user.adress }} <br> 
+        {{ user.zipCode }} {{ user.city }}
     </mat-card-content>
 </mat-card>

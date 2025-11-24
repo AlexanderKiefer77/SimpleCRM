@@ -1,9 +1,16 @@
 .user-detail-header {
     min-height: 250px;
-    background-color: #ff5b27;
+    background-color: #ff6e42;
     color: whitesmoke;
     display: flex;
-    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+    padding-bottom: 16px;
 
     img {
         height: 100px;
@@ -11,6 +18,11 @@
         object-fit: cover;
         border-radius: 100%;
     }
+
+    h2, p {
+        margin: 0;
+    }
+
 }
 
 .user-details {
@@ -30,4 +42,8 @@
     position: absolute;
     right: 0;
     top: 0;
+}
+
+.address-info {
+    margin-left: 16px;
 }

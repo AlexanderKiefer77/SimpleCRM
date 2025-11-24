@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDw7HruTqRT18mmOjRPm4kYqmaJi15MWNc",
+  apiKey: "AIzaSyDw7HruTqRT18mmOjRPm4kYqmaJi15MWN",
   authDomain: "simple-crm-cbdd6.firebaseapp.com",
   projectId: "simple-crm-cbdd6",
   storageBucket: "simple-crm-cbdd6.firebasestorage.app",

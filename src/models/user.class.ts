@@ -1,28 +1,35 @@
 export class User {
-    firstName: string;
-    lastName: string;
-    birthDate: number;
-    adress: string;
-    zipCode: number;
-    city: string;
+  firstName: string = '';
+  lastName: string = '';
+  email: string = '';
+  adress: string = '';
+  zipCode: string = '';
+  city: string = '';
+  birthDate?: number;
+  id?: string;
 
-    constructor(obj?: any) { // ? = obtional
-        this.firstName = obj ? obj.firstName : '';
-        this.lastName = obj ? obj.lastName : '';
-        this.birthDate = obj ? obj.birthDate : '';
-        this.adress = obj ? obj.adress : '';
-        this.zipCode = obj ? obj.zipCode : '';
-        this.city = obj ? obj.city : '';
-    }
+  constructor(obj?: any) {
+    if (!obj) return;
 
-    public toJSON() {
-        return {
-            firstName: this.firstName,
-            lastName: this.lastName,
-            birthDate: this.birthDate,
-            adress: this.adress,
-            zipCode: this.zipCode,
-            city: this.city
-        };
-    }
+    this.firstName = obj.firstName ?? '';
+    this.lastName  = obj.lastName ?? '';
+    this.email     = obj.email ?? '';
+    this.adress    = obj.adress ?? '';
+    this.zipCode   = obj.zipCode ?? '';
+    this.city      = obj.city ?? '';
+    this.birthDate = obj.birthDate ?? undefined;
+    this.id        = obj.id ?? undefined;
+  }
+
+  toJSON() {
+    return {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      adress: this.adress,
+      zipCode: this.zipCode,
+      city: this.city,
+      birthDate: this.birthDate,
+    };
+  }
 }

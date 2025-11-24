@@ -8,10 +8,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr> <!--  <tr *ngFor="let user of allUsers"> -->
-                <td>fsafasfa</td> <!-- <td>{{ user.firstName }} {{ user.lastName }}</td> -->
-                <td>fsafasfa</td> <!-- <td>{{ user.email }}</td> -->
-                <td>fsafasfa</td> <!-- <td>{{ user.city }}</td> -->
+            <tr *ngFor="let user of allUsers" [routerLink]="['/user/' + user.id]">
+                <td>{{ user.firstName }} {{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.city }}</td>
             </tr>
         </tbody>
     </table>
