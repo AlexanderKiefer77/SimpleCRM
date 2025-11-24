@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,10 +27,17 @@ import { db } from '../firebase.config';
 })
 export class DialogEditAddress {
 
-  user: UserModel = new UserModel();
+  user: UserModel;
+  userId?: string;
   loading = false;
 
-  constructor(public dialogRef: MatDialogRef<DialogEditAddress>) {}
+  constructor(
+    public dialogRef: MatDialogRef<DialogEditAddress>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.user = new UserModel(data?.user || {}); // sicherstellen, dass data vorhanden ist
+    this.userId = this.user.id; // userId setzen (oder weglassen, wenn nicht gebraucht)
+  }
 
   async saveUser() {
     this.loading = true;
@@ -41,6 +48,7 @@ export class DialogEditAddress {
         zipCode: this.user.zipCode,
         city: this.user.city
       });
+
       console.log('Address updated');
       this.dialogRef.close();
     } catch (error) {

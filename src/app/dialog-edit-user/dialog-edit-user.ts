@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -30,23 +30,36 @@ import { db } from '../firebase.config';
   styleUrls: ['./dialog-edit-user.scss'],
 })
 export class DialogEditUser {
-
-  user: UserModel = new UserModel();
+  user: UserModel;
   loading = false;
   birthDate: Date = new Date();
 
-  constructor(public dialogRef: MatDialogRef<DialogEditUser>) {}
+  constructor(
+    public dialogRef: MatDialogRef<DialogEditUser>,
+    @Inject(MAT_DIALOG_DATA) public data: { user?: UserModel; userId?: string }
+  ) {
+    this.user = data?.user ? new UserModel(data.user) : new UserModel();
+    if (this.user.birthDate) {
+      this.birthDate = new Date(this.user.birthDate);
+    }
+  }
 
   async saveUser() {
+    if (!this.user.id) {
+      console.error('Cannot save user: ID is missing');
+      return;
+    }
+
     this.loading = true;
     try {
-      const userRef = doc(db, 'users', this.user.id!);
+      const userRef = doc(db, 'users', this.user.id);
       await updateDoc(userRef, {
         firstName: this.user.firstName,
         lastName: this.user.lastName,
         email: this.user.email,
         birthDate: this.birthDate.getTime()
       });
+
       console.log('User updated');
       this.dialogRef.close();
     } catch (error) {
@@ -54,5 +67,9 @@ export class DialogEditUser {
     } finally {
       this.loading = false;
     }
+  }
+
+  cancel() {
+    this.dialogRef.close();
   }
 }
